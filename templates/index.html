@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Text → Handwriting</title>
+  <link rel="icon" type="image/png" href="/static/images/favicon.png" />
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+
+<body>
+  <div class="main-box">
+
+    <h1 class="main-heading">Text → Handwriting</h1>
+
+    <!-- ================= STEP 1 ================= -->
+    <div id="step1">
+      <label class="sub-heading">Enter Text</label>
+      <textarea id="text_input" class="input" placeholder="Type here..."></textarea>
+
+      <span style="display: block; text-align: center;">OR</span>
+
+      <label class="sub-heading margin-top">Upload Image</label>
+      <input type="file" id="upload_image" class="input">
+
+      <div class="button-row">
+        <button id="toStep2" class="btn green">Next</button>
+      </div>
+    </div>
+
+
+    <!-- Popup overlay + message box -->
+    <div id="popupOverlay" class="popup-overlay" style="display: none;">
+        <div class="popup-message">
+            <span id="popupText"></span>
+            <button id="popupClose">&times;</button>
+        </div>
+    </div>
+
+
+
+    <!-- ================= STEP 2 ================= -->
+    <div id="step2" style="display:none;">
+      <!-- PAGE SIZE + ORIENTATION -->
+      <div class="row">
+        <div class="left">
+          <label class="sub-heading">Page Size</label>
+          <select id="paper" class="input">
+            <option>A4</option>
+            <option>Letter</option>
+            <option>A5</option>
+          </select>
+        </div>
+        <div class="right">
+          <label class="sub-heading">Orientation</label>
+          <div class="radio-group">
+            <label><input type="radio" name="orientation" value="portrait" checked> Portrait</label>
+            <label><input type="radio" name="orientation" value="landscape"> Landscape</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- PAGE MARGIN -->
+      <label class="sub-heading margin-top">Page Margin</label>
+      <div class="row">
+        <div class="left">
+          <label class="small">Top</label>
+          <select id="margin_top" class="input"><option>15</option><option>10</option><option>20</option></select>
+          <label class="small">Left</label>
+          <select id="margin_left" class="input"><option>15</option><option>10</option><option>20</option></select>
+        </div>
+        <div class="right">
+          <label class="small">Bottom</label>
+          <select id="margin_bottom" class="input"><option>15</option><option>10</option><option>20</option></select>
+          <label class="small">Right</label>
+          <select id="margin_right" class="input"><option>15</option><option>10</option><option>20</option></select>
+        </div>
+      </div>
+
+      <!-- FONT SIZE + OUTPUT -->
+      <div class="row margin-top">
+        <div class="left">
+          <label class="sub-heading">Font Size</label>
+          <select id="font_size" class="input"><option>24</option><option>28</option><option>32</option></select>
+        </div>
+        <div class="right">
+          <label class="sub-heading">Output</label>
+          <select id="output_type" class="input"><option>PNG</option><option>PDF</option></select>
+        </div>
+      </div>
+
+      <!-- STEP 2 BUTTONS -->
+      <div class="button-row">
+        <button id="backStep2" class="btn gray">Back</button>
+        <button id="toStep3" class="btn green">Next</button>
+      </div>
+    </div>
+
+    <!-- ================= STEP 3 / PREVIEW ================= -->
+    <div id="step3" style="display:none;">
+      <div id="previewContainer"></div>
+      <div class="button-row">
+        <a id="downloadLink" class="btn green" download>Download</a>
+        <button id="new" class="btn gray">New</button>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="/static/js/script.js"></script>
+</body>
+</html>
