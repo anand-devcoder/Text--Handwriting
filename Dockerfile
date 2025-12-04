@@ -1,8 +1,19 @@
-# Base image
+# -------------------------------
+# Base Image
+# -------------------------------
 FROM python:3.11-slim
 
-# Install system packages including Tesseract OCR and dependencies for Pillow, OpenCV, ReportLab
-RUN apt-get update && apt-get install -y \
+# -------------------------------
+# Environment Variables
+# -------------------------------
+ENV PYTHONUNBUFFERED=1
+ENV PYTHONDONTWRITEBYTECODE=1
+
+# -------------------------------
+# Install system dependencies
+# -------------------------------
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    apt-utils \
     tesseract-ocr \
     libtesseract-dev \
     libleptonica-dev \
@@ -15,23 +26,31 @@ RUN apt-get update && apt-get install -y \
     liblcms2-dev \
     libharfbuzz-dev \
     libfribidi-dev \
-    libxcb1 \
+    libxcb1-dev \
     && rm -rf /var/lib/apt/lists/*
 
+# -------------------------------
 # Create app directory
+# -------------------------------
 WORKDIR /app
 
+# -------------------------------
 # Copy project files
+# -------------------------------
 COPY . /app
 
-# Upgrade pip first
+# -------------------------------
+# Upgrade pip and install Python dependencies
+# -------------------------------
 RUN python3 -m pip install --upgrade pip
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Install Python dependencies
-RUN pip install -r requirements.txt
-
+# -------------------------------
 # Expose port
+# -------------------------------
 EXPOSE 10000
 
-# Start the app using gunicorn
+# -------------------------------
+# Run the app with Gunicorn
+# -------------------------------
 CMD ["gunicorn", "--bind", "0.0.0.0:10000", "app:app"]
