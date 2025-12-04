@@ -1,10 +1,10 @@
 # -------------------------------
-# Base Image
+# Base image
 # -------------------------------
-FROM python:3.11-slim
+FROM python:3.11.9-buster-slim
 
 # -------------------------------
-# Environment Variables
+# Environment variables
 # -------------------------------
 ENV PYTHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1
@@ -13,7 +13,11 @@ ENV PYTHONDONTWRITEBYTECODE=1
 # Install system dependencies
 # -------------------------------
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    apt-utils \
+    gnupg \
+    dirmngr \
+    ca-certificates \
+    software-properties-common \
+    && apt-get install -y --no-install-recommends \
     tesseract-ocr \
     libtesseract-dev \
     libleptonica-dev \
