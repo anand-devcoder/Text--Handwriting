@@ -1,7 +1,7 @@
 # -------------------------------
 # Base image
 # -------------------------------
-FROM python:3.11.9-buster-slim
+FROM python:3.11-bullseye-slim
 
 # -------------------------------
 # Environment variables
