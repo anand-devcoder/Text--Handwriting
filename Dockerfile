@@ -1,7 +1,7 @@
 # -------------------------------
-# Base image
+# Base image  (THIS WORKS)
 # -------------------------------
-FROM python:3.11-bullseye-slim
+FROM python:3.11-bookworm
 
 # -------------------------------
 # Environment variables
@@ -13,11 +13,6 @@ ENV PYTHONDONTWRITEBYTECODE=1
 # Install system dependencies
 # -------------------------------
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    gnupg \
-    dirmngr \
-    ca-certificates \
-    software-properties-common \
-    && apt-get install -y --no-install-recommends \
     tesseract-ocr \
     libtesseract-dev \
     libleptonica-dev \
