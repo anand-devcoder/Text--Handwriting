@@ -12,8 +12,9 @@ if platform.system() == "Windows":
     pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 
 app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = 'uploads'
-app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16 MB
+# ensure uploads exists
+if not os.path.exists("uploads"):
+    os.makedirs("uploads")
 
 # Paper sizes in inches
 PAPER_SIZES_IN = {
@@ -183,5 +184,6 @@ def download_file(folder, filename):
 
 if __name__ == '__main__':
     app.run(debug=True)
+
 
 
