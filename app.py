@@ -12,6 +12,8 @@ if platform.system() == "Windows":
     pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 
 app = Flask(__name__)
+
+app.config['UPLOAD_FOLDER'] = 'uploads'
 # ensure uploads exists
 if not os.path.exists("uploads"):
     os.makedirs("uploads")
@@ -184,6 +186,7 @@ def download_file(folder, filename):
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=10000)
+
 
 
 
