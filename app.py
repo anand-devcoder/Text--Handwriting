@@ -1,5 +1,5 @@
-import os
 import platform
+import os
 from datetime import datetime
 from flask import Flask, render_template, request, send_from_directory, jsonify, url_for
 from werkzeug.utils import secure_filename
@@ -12,11 +12,8 @@ if platform.system() == "Windows":
     pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 
 app = Flask(__name__)
-
 app.config['UPLOAD_FOLDER'] = 'uploads'
-# ensure uploads exists
-if not os.path.exists("uploads"):
-    os.makedirs("uploads")
+os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
 # Paper sizes in inches
 PAPER_SIZES_IN = {
@@ -183,9 +180,6 @@ def process():
 def download_file(folder, filename):
     return send_from_directory(os.path.join(app.config['UPLOAD_FOLDER'], folder), filename)
 
-
-if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=10000)
 
 
 
