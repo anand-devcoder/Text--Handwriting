@@ -45,11 +45,12 @@ RUN python3 -m pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
 
 # -------------------------------
-# Expose port
+# Expose port (optional)
 # -------------------------------
 EXPOSE 10000
 
 # -------------------------------
-# Run the app with Gunicorn
+# Run the app with Gunicorn using Render's PORT env
 # -------------------------------
-CMD ["gunicorn", "--bind", "0.0.0.0:10000", "app:app"]
+CMD ["sh", "-c", "gunicorn --bind 0.0.0.0:${PORT:-10000} app:app"]
+
